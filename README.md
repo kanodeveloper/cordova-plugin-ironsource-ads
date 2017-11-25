@@ -3,7 +3,7 @@
 
 <p align="left">
 <img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">
-<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.1-blue.svg?style=flat-square">
+<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.3-blue.svg?style=flat-square">
 </p>
 
 --------
@@ -232,7 +232,7 @@ window.addEventListener("interstitialClosed", function(){
 ```
 **Interstitial Will Open**
 ```javascript
-window.addEventListener("interstitialClosed", function(){
+window.addEventListener("interstitialWillOpen", function(){
 
 });
 ```
@@ -390,32 +390,41 @@ window.addEventListener("bannerWillLeaveApplication", function(){
 
 ### Android
 
-Edit `src/android/ironsourceads.gradle` from this plugin and uncomment
+[Follow the integration guides here](https://developers.ironsrc.com/ironsource-mobile/android/android-sdk/#step-2)
+
+Edit `src/android/ironsourceads.gradle` from this plugin and add the mediation adapters you need
+
+*Example*
 ```java
-  dependencies {
-    compile 'com.ironsource.sdk:mediationsdk:6.7.0@jar'
+cdvPluginPostBuildExtras.add({
 
-    // Uncomment required mediation adapters
-
-    // compile 'com.ironsource.adapters:adcolonyadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:admobadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:applovinadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:chartboostadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:facebookadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:hyprmxadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:inmobiadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:mediabrixadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:millennialmediaadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:mopubadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:tapjoyadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:unityadsadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:vungleadapter:4.0.0@jar'
+  repositories {
+    maven {
+      url "https://dl.bintray.com/ironsource-mobile/android-sdk"
+    }
   }
+
+  repositories {
+    maven {
+      url "http://dl.bintray.com/ironsource-mobile/android-adapters"
+    }
+  }
+
+  dependencies {
+    compile 'com.ironsource.sdk:mediationsdk:6.7.3@jar'
+
+    //Example
+    compile 'com.ironsource.adapters:admobadapter:4.0.3@jar'
+    compile 'com.ironsource.adapters:facebookadapter:4.0.2@jar'
+    compile 'com.ironsource.adapters:unityadsadapter:4.0.1@jar'
+  }
+});
+
 ```
 
 ### IOS
 **IOS requires manual downloading of Adapter & SDK**
-[Download Adapters Here](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)
+[Download Adapters Here and follow the integration guides](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)
 
 *If you have any questions, create an issue, and I'll walk you through it. *
 
@@ -430,12 +439,13 @@ Edit `src/android/ironsourceads.gradle` from this plugin and uncomment
         </config-file>
         <header-file src="src/ios/IronSourceAdsPlugin.h" />
         <source-file src="src/ios/IronSourceAdsPlugin.m" />
-        <framework src="src/ios/IronSource.framework" custom="true" />
+        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.3.1" />
 
         <!-- ADD MEDIATION FRAMEWORKS HERE -->
         <!-- Example -->
-        <framework src="src/ios/ISAdColonyAdapter.framework" custom="true" />
-        <framework src="src/ios/ISAdMobAdapter.framework" custom="true" />
+        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.0.2.1" />
+        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.0.1.1" />
+        <framework src="IronSourceUnityAdsAdapter" type="podspec" spec="~> 4.0.1.2" />
         <!-- Example -->
 
         <framework src="Foundation.framework" />
