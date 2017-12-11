@@ -555,7 +555,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         {
             parentLayout = (FrameLayout) cordovaWebView.getView().getParent();
 
-            bannerContainerLayout = new RelativeLayout(self.cordova.getActivity());
+            bannerContainerLayout = new RelativeLayout(this.cordova.getActivity());
 
             RelativeLayout.LayoutParams bannerContainerLayoutParams = new RelativeLayout.LayoutParams(
                     LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
