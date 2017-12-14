@@ -551,31 +551,37 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     /**----------------------- BANNER --------------------------- */
     private void showBannerAction(JSONArray args, final CallbackContext callbackContext) {
 
-        if( mIronSourceBannerLayout != null )
-        {
-            parentLayout = (FrameLayout) cordovaWebView.getView().getParent();
+        final IronSourceAdsPlugin self = this;
 
-            bannerContainerLayout = new RelativeLayout(this.cordova.getActivity());
+        cordova.getActivity().runOnUiThread(new Runnable() {
 
-            RelativeLayout.LayoutParams bannerContainerLayoutParams = new RelativeLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            public void run() {
 
-            bannerContainerLayout.setGravity(Gravity.BOTTOM);
+                if (mIronSourceBannerLayout != null) {
+                    parentLayout = (FrameLayout) cordovaWebView.getView().getParent();
 
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    bannerContainerLayout = new RelativeLayout(self.cordova.getActivity());
 
-            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                    RelativeLayout.LayoutParams bannerContainerLayoutParams = new RelativeLayout.LayoutParams(
+                            LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
-            bannerContainerLayout.addView(mIronSourceBannerLayout, layoutParams);
+                    bannerContainerLayout.setGravity(Gravity.BOTTOM);
 
-            parentLayout.addView(bannerContainerLayout, bannerContainerLayoutParams);
-        }
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-        callbackContext.success();
+                    layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
+                    bannerContainerLayout.addView(mIronSourceBannerLayout, layoutParams);
+
+                    parentLayout.addView(bannerContainerLayout, bannerContainerLayoutParams);
+                }
+
+                callbackContext.success();
+            }
+        });
+
     }
-
-
 
     private void loadBannerAction(JSONArray args, final CallbackContext callbackContext) {
 
@@ -599,6 +605,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
                         @Override
                         public void onBannerAdLoaded() {
+                            Log.d(TAG, "onBannerAdLoaded");
                             self.emitWindowEvent(EVENT_BANNER_DID_LOAD);
                         }
 
@@ -638,32 +645,36 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     }
 
+    private void hideBannerView() {
 
-    private void hideBannerView()
-    {
-        if (mIronSourceBannerLayout != null)
-        {
-            if(parentLayout != null && bannerContainerLayout != null)
-            {
-                if(mIronSourceBannerLayout.getParent() != null)
-                {
-                    bannerContainerLayout.removeView(mIronSourceBannerLayout);
+        final IronSourceAdsPlugin self = this;
+
+        cordova.getActivity().runOnUiThread(new Runnable() {
+
+            public void run() {
+
+                if (mIronSourceBannerLayout != null) {
+                    if (parentLayout != null && bannerContainerLayout != null) {
+                        if (mIronSourceBannerLayout.getParent() != null) {
+                            bannerContainerLayout.removeView(mIronSourceBannerLayout);
+                        }
+                        if (bannerContainerLayout.getParent() != null) {
+                            parentLayout.removeView(bannerContainerLayout);
+                        }
+                    }
                 }
-                if(bannerContainerLayout.getParent() != null)
-                {
-                    parentLayout.removeView(bannerContainerLayout);
-                }
+
             }
-        }
+
+        });
+
     }
 
     /**
      * Destory Banner
      */
-    private void destroyBanner()
-    {
-        if(mIronSourceBannerLayout != null)
-        {
+    private void destroyBanner() {
+        if (mIronSourceBannerLayout != null) {
             IronSource.destroyBanner(mIronSourceBannerLayout);
             mIronSourceBannerLayout = null;
         }
