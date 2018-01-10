@@ -13,7 +13,7 @@ cdvPluginPostBuildExtras.add({
   }
 
   dependencies {
-    compile 'com.ironsource.sdk:mediationsdk:6.7.3@jar'
+    compile 'com.ironsource.sdk:mediationsdk:6.7.4@jar'
 
     // Uncomment required mediation adapters
 
@@ -21,7 +21,7 @@ cdvPluginPostBuildExtras.add({
     compile 'com.ironsource.adapters:admobadapter:4.0.3@jar'
     // compile 'com.ironsource.adapters:applovinadapter:4.0.0@jar'
     // compile 'com.ironsource.adapters:chartboostadapter:4.0.0@jar'
-    compile 'com.ironsource.adapters:facebookadapter:4.0.2@jar'
+    compile 'com.ironsource.adapters:facebookadapter:4.0.3@jar'
     // compile 'com.ironsource.adapters:hyprmxadapter:4.0.0@jar'
     // compile 'com.ironsource.adapters:inmobiadapter:4.0.0@jar'
     // compile 'com.ironsource.adapters:mediabrixadapter:4.0.0@jar'
