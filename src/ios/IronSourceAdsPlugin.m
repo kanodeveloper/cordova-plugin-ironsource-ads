@@ -372,6 +372,11 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     {
         if(self.loadingBanner == true){
 
+        // We call destroy banner before loading a new banner
+            if (self.bannerView) {
+                [self destroyBanner];
+            }
+
             self.bannerView = bannerView;
 
             CGFloat xOffset = .0f;
