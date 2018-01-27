@@ -1,0 +1,110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@3.10.9
+3 info using node@v7.2.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/charliebodman/Documents/Projects/Kanoapps/cordova-plugin-ironsource-ads-ka',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/charliebodman/.npm/cordova-plugin-ironsource-ads-ka/1.0.14/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/charliebodman/.npm correctMkdir not in flight; initializing
+10 info lifecycle cordova-plugin-ironsource-ads-ka@1.0.14~prepublish: cordova-plugin-ironsource-ads-ka@1.0.14
+11 silly lifecycle cordova-plugin-ironsource-ads-ka@1.0.14~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/charliebodman/.npm/cordova-plugin-ironsource-ads-ka/1.0.14/package.tgz',
+12 verbose tar pack   '/Users/charliebodman/Documents/Projects/Kanoapps/cordova-plugin-ironsource-ads-ka' ]
+13 verbose tarball /Users/charliebodman/.npm/cordova-plugin-ironsource-ads-ka/1.0.14/package.tgz
+14 verbose folder /Users/charliebodman/Documents/Projects/Kanoapps/cordova-plugin-ironsource-ads-ka
+15 verbose addLocalTarball adding from inside cache /Users/charliebodman/.npm/cordova-plugin-ironsource-ads-ka/1.0.14/package.tgz
+16 verbose correctMkdir /Users/charliebodman/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd cordova-plugin-ironsource-ads-ka@1.0.14
+18 verbose afterAdd /Users/charliebodman/.npm/cordova-plugin-ironsource-ads-ka/1.0.14/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/charliebodman/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/charliebodman/.npm/cordova-plugin-ironsource-ads-ka/1.0.14/package/package.json written
+21 silly publish { name: 'cordova-plugin-ironsource-ads-ka',
+21 silly publish   version: '1.0.14',
+21 silly publish   description: 'Ironsource ads for cordova based development',
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/charlesbodman/cordova-plugin-ironsource-ads.git' },
+21 silly publish   keywords:
+21 silly publish    [ 'cordova',
+21 silly publish      'ecosystem:cordova',
+21 silly publish      'cordova-android',
+21 silly publish      'cordova-ios' ],
+21 silly publish   author: { name: 'Charles Bodman' },
+21 silly publish   license: 'MIT',
+21 silly publish   bugs: { url: 'https://github.com/charlesbodman/cordova-plugin-ironsource-ads/issues' },
+21 silly publish   homepage: 'https://github.com/charlesbodman/cordova-plugin-ironsource-ads',
+21 silly publish   readme: '# IronSource Ads Cordova Plugin\n# <img src="https://github.com/charlesbodman/cordova-plugin-ironsource-ads/blob/master/images/ironsource_logo.png?raw=true" width="500"  />\n\n<p align="left">\n<img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">\n<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.3-blue.svg?style=flat-square">\n</p>\n\n--------\n\n## Table of Contents\n\n- [State of Development](#state-of-development)\n- [Install](#install)\n- [API](#api)\n- [Adding Additional AD Network SDKs](#adding-additional-sdks)\n- [Official IronSource Documentation](http://developers.ironsrc.com/)\n\n\n## State of Development\n- [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=Rewarded%20Video%20Support&style=flat-square">\n- [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=Offerwall%20Support&style=flat-square">\n- [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=Interstitial%20Support&style=flat-square">\n- [ ] <img src="https://img.shields.io/badge/-In%20Development-yellow.svg?label=Banner%20Support&style=flat-square">\n- [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=IOS%20Banner%20Support&style=flat-square">\n- [ ] <img src="https://img.shields.io/badge/-In%20Development-yellow.svg?label=Andorid%20Banner%20Support&style=flat-square">\n\n\n--------\n\n## Install\n\n```bash\ncordova plugin add cordova-plugin-ironsource-ads\n```\n\n--------\n## API\n\n- [Initialization](#initialization)\n- [Validate Integration](#validate-integration)\n- [Set Dynamic User ID](#set-dynamic-user-id)\n- [Rewarded Videos](#rewarded-videos)\n  - [Has Rewarded Video](#has-rewarded-video)\n  - [Show Rewarded Video](#show-rewarded-video)\n  - [Rewarded Video Events](#rewarded-video-events)\n- [Interstitials](#interstitials)\n  - [Has Interstitial](#has-interstitial)\n  - [Load Interstitial](#load-interstitial)\n  - [Show Interstitial](#show-interstitial)\n  - [Interstitial Events](#interstitial-events)\n- [Offerwalls](#offerwalls)\n  - [Has Offerwall](#has-offerwall)\n  - [Show Offerwall](#show-offerwall)\n  - [Offerwall Events](#offerwall-events)\n- [Banners](#banners)\n  - [Show Banner](#show-banner)\n  - [Hide Banner](#hide-banner)\n  - [Banner Events](#banner-events)\n\nAll methods support optional `onSuccess` and `onFailure` parameters\n\n### Initialization\n```javascript\nIronSourceAds.init({\n    appKey: appKey\n});\n```\n\n### Validate Integration\nOnce you have finished your integration, call the following function and confirm you have integrated the ad networks you want are marked **VERIFIED**:\n\n*If they are not marked verified, look at the [Adding Additional AD Network SDKs](#adding-additional-sdks) section for help or the [Official IronSource Documentation](http://developers.ironsrc.com/)*\n\n\n```javascript\nIronSourceAds.validateIntegration();\n```\n\n\n**Check xcode / android studio debugger for validation output**\n<img src="https://github.com/charlesbodman/cordova-plugin-ironsource-ads/blob/master/images/integration_helper.png"/>\n\n***\n### Set Dynamic User ID\n> The Dynamic UserID is a parameter that can be changed throughout the session and will be received in the server-to-server ad > rewarded callbacks. This parameter helps verify AdRewarded transactions and must be set before calling ShowRV.\n```javascript\nIronSourceAds.setDynamicUserId({userId:\'example\'});\n```\n***\n### Rewarded Videos\n\n#### Has Rewarded Video\n\n```javascript\nIronSourceAds.hasRewardedVideo({\n    onSuccess: function (available) {\n\n    }\n});\n```\n\n#### Show Rewarded Video\n```javascript\nIronSourceAds.showRewardedVideo();\n```\n\n**Show Rewarded Video (With options)**\n```javascript\nIronSourceAds.showRewardedVideo({\n    placement: "placementName", // Optional\n    onSuccess: function () { }, // Optional\n    onFailure: function (error) { } //Optional\n});\n```\n\n#### Rewarded Video Events\n\n\n**Rewarded Video Availabilty Changed**\n```javascript\nwindow.addEventListener("rewardedVideoAvailabilityChanged", function(event){\n\n    var available = event.available;\n\n});\n```\n**Rewarded Video Rewarded**\n```javascript\nwindow.addEventListener("rewardedVideoRewardReceived", function(event){\n\n    var placement = event.placement;\n    var placementName = placement.placementName;\n    var rewardAmount = placement.rewardAmount;\n    var rewardName = placement.rewardName;\n\n});\n```\n**Rewarded Video Started**\n```javascript\nwindow.addEventListener("rewardedVideoStarted", function(){\n\n});\n```\n**Rewarded Video Ended**\n```javascript\nwindow.addEventListener("rewardedVideoEnded", function(){\n\n});\n```\n**Rewarded Video Opened**\n```javascript\nwindow.addEventListener("rewardedVideoOpened", function(){\n\n});\n```\n**Rewarded Video Closed**\n```javascript\nwindow.addEventListener("rewardedVideoClosed", function(){\n\n});\n```\n**Rewarded Video Failed**\n```javascript\nwindow.addEventListener("rewardedVideoFailed", function(){\n\n});\n```\n***\n### Interstitials\n\n#### Has Interstitial\n```javascript\nIronSourceAds.hasInterstitial({\n    onSuccess: function (available) {\n\n    }\n});\n```\n#### Load Interstitial\n_Must be called before `showInterstitial`\n```javascript\nIronSourceAds.loadInterstitial();\n```\n\n***\n#### Show Interstitial\n```javascript\nIronSourceAds.showInterstitial();\n```\n\n**Show Interstitial Video (With options)**\n```javascript\nIronSourceAds.showInterstitial({\n    placement: "placementName", // Optional\n    onSuccess: function () { }, // Optional\n    onFailure: function (error) { } // Optional\n});\n```\n***\n#### Interstitial Events\n\n**Interstitial Loaded**\n```javascript\nwindow.addEventListener("interstitialLoaded", function(){\n\n});\n```\n**Interstitial Shown**\n```javascript\nwindow.addEventListener("interstitialShown", function(){\n\n});\n```\n**Interstitial Show Failed**\n```javascript\nwindow.addEventListener("interstitialShowFailed", function(){\n\n});\n```\n**Interstitial Clicked**\n```javascript\nwindow.addEventListener("interstitialClicked", function(){\n\n});\n```\n**Interstitial Closed**\n```javascript\nwindow.addEventListener("interstitialClosed", function(){\n\n});\n```\n**Interstitial Will Open**\n```javascript\nwindow.addEventListener("interstitialWillOpen", function(){\n\n});\n```\n**Interstitial Failed To Load**\n```javascript\nwindow.addEventListener("interstitialFailedToLoad", function(){\n\n});\n```\n***\n\n### Offerwalls\n\n#### Has Offerwall\n\n```javascript\nIronSourceAds.hasOfferwall({\n    onSuccess: function (available) {\n\n    }\n});\n```\n\n#### Show Offerwall\n```javascript\nIronSourceAds.showOfferwall();\n```\n\n**Show Offerwall (With options)**\n```javascript\nIronSourceAds.showOfferwall({\n    placement: "placementName", // Optional\n    onSuccess: function () { }, // Optional\n    onFailure: function (error) { } // Optional\n});\n```\n\n#### Offerwall Events\n\n**Offerwall Availability Changed**\n```javascript\nwindow.addEventListener("offerwallAvailabilityChanged", function(event){\n  var available = event.available;\n});\n```\n\n**Offerwall Shown**\n```javascript\nwindow.addEventListener("offerwallShown", function(){\n\n});\n```\n**Offerwall Credit Recieved**\n```javascript\nwindow.addEventListener("offerwallCreditReceived", function(event){\n\n  var credits = event.credits; // The number of credits the user has earned since //the last (void)didReceiveOfferwallCredits:\n  var totalCredits = event.totalCredits; //The total number of credits ever earned by the user\n\n});\n```\n**Offerwall Credit Failed**\n```javascript\nwindow.addEventListener("offerwallCreditFailed", function(){\n\n});\n```\n**Offerwall Closed**\n```javascript\nwindow.addEventListener("offerwallClosed", function(){\n\n});\n```\n**Offerwall Show Failed**\n```javascript\nwindow.addEventListener("offerwallShowFailed", function(){\n\n});\n```\n\n\n\n### Banners\n\n*Banner ads require Admob, Facebook, or InMobi integrated to work*\n\n#### Show Banner\n```javascript\nIronSourceAds.showBanner();\n```\n\n**Show Banner (With options)**\n```javascript\nIronSourceAds.showBanner({\n    placement: "placementName", // Optional\n    size:"standard", // Optional ("standard","large","rectangle","tablet")\n    position:"bottom", //Optional ("top", "bottom", "center"),\n    onSuccess: function () { }, // Optional\n    onFailure: function (error) { } // Optional\n});\n```\n\n#### Hide Banner\n```javascript\nIronSourceAds.hideBanner();\n```\n\n\n#### Banner Events\n\n\n**Banner Did Load**\n```javascript\nwindow.addEventListener("bannerDidLoad", function(event){\n\n});\n```\n\n**Banner Failed to Load**\n```javascript\nwindow.addEventListener("bannerFailedToLoad", function(error){\n\n});\n```\n\n**Banner Did Click**\n```javascript\nwindow.addEventListener("bannerDidClick");\n```\n\n**Banner Will Present Screen**\n```javascript\nwindow.addEventListener("bannerWillPresentScreen", function(){\n\n});\n```\n\n**Banner Did Dismiss Screen**\n```javascript\nwindow.addEventListener("bannerDidDismissScreen", function(){\n\n});\n```\n**Banner will leave application**\n```javascript\nwindow.addEventListener("bannerWillLeaveApplication", function(){\n\n});\n```\n\n\n\n# Adding Additional SDKS\n**By default, this plugin does not contain other ad providers sdks**\n\n### Android\n\n[Follow the integration guides here](https://developers.ironsrc.com/ironsource-mobile/android/android-sdk/#step-2)\n\nEdit `src/android/ironsourceads.gradle` from this plugin and add the mediation adapters you need\n\n*Example*\n```java\ncdvPluginPostBuildExtras.add({\n\n  repositories {\n    maven {\n      url "https://dl.bintray.com/ironsource-mobile/android-sdk"\n    }\n  }\n\n  repositories {\n    maven {\n      url "http://dl.bintray.com/ironsource-mobile/android-adapters"\n    }\n  }\n\n  dependencies {\n    compile \'com.ironsource.sdk:mediationsdk:6.7.3@jar\'\n\n    //Example\n    compile \'com.ironsource.adapters:admobadapter:4.0.3@jar\'\n    compile \'com.ironsource.adapters:facebookadapter:4.0.2@jar\'\n    compile \'com.ironsource.adapters:unityadsadapter:4.0.1@jar\'\n  }\n});\n\n```\n\n### IOS\n**IOS requires manual downloading of Adapter & SDK**\n[Download Adapters Here and follow the integration guides](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)\n\n*If you have any questions, create an issue, and I\'ll walk you through it. *\n\n**Edit `plugin.xml` of this plugin**\n\n```xml\n   <platform name="ios">\n        <config-file target="config.xml" parent="/*">\n            <feature name="IronSourceAdsPlugin">\n                <param name="ios-package" value="IronSourceAdsPlugin" />\n            </feature>\n        </config-file>\n        <header-file src="src/ios/IronSourceAdsPlugin.h" />\n        <source-file src="src/ios/IronSourceAdsPlugin.m" />\n        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.3.1" />\n\n        <!-- ADD MEDIATION FRAMEWORKS HERE -->\n        <!-- Example -->\n        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.0.2.1" />\n        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.0.1.1" />\n        <framework src="IronSourceUnityAdsAdapter" type="podspec" spec="~> 4.0.1.2" />\n        <!-- Example -->\n\n        <framework src="Foundation.framework" />\n        <framework src="AVFoundation.framework" />\n        <framework src="CoreMedia.framework" />\n        <framework src="CoreVideo.framework" />\n        <framework src="QuartzCore.framework" />\n        <framework src="SystemConfiguration.framework" />\n        <framework src="CoreGraphics.framework" />\n        <framework src="CFNetwork.framework" />\n        <framework src="MobileCoreServices.framework" />\n        <framework src="libz.dylib" />\n        <framework src="StoreKit.framework" />\n        <framework src="AdSupport.framework" />\n        <framework src="CoreLocation.framework" />\n        <framework src="CoreTelephony.framework" />\n        <framework src="Security.framework" />\n    </platform>\n```\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: 'a80310f138fc9bd8e4873274b132ab5449d50361',
+21 silly publish   _id: 'cordova-plugin-ironsource-ads-ka@1.0.14',
+21 silly publish   scripts: {},
+21 silly publish   _shasum: '9225b5d65d8192d295162676a59568e20d4f3551',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name cordova-plugin-ironsource-ads-ka
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'cordova-plugin-ironsource-ads-ka',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'cordova-plugin-ironsource-ads-ka',
+26 silly mapToRegistry   name: 'cordova-plugin-ironsource-ads-ka',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/cordova-plugin-ironsource-ads-ka
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/charliebodman/.npm/cordova-plugin-ironsource-ads-ka/1.0.14/package.tgz
+30 verbose request uri https://registry.npmjs.org/cordova-plugin-ironsource-ads-ka
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 11:20:55 AM
+33 verbose request using bearer token for auth
+34 verbose request id 9c4272ea619b08be
+35 http request PUT https://registry.npmjs.org/cordova-plugin-ironsource-ads-ka
+36 http 403 https://registry.npmjs.org/cordova-plugin-ironsource-ads-ka
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '92',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Sat, 27 Jan 2018 19:20:55 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-sea1035-SEA',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1517080855.265626,VS0,VE368',
+37 verbose headers   vary: 'Accept-Encoding, Accept' }
+38 verbose request invalidating /Users/charliebodman/.npm/registry.npmjs.org/cordova-plugin-ironsource-ads-ka on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: You cannot publish over the previously published version 1.0.14. : cordova-plugin-ironsource-ads-ka
+40 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+40 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+40 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:187:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1048:10)
+40 verbose stack     at emitOne (events.js:96:13)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:969:12)
+41 verbose statusCode 403
+42 verbose pkgid cordova-plugin-ironsource-ads-ka
+43 verbose cwd /Users/charliebodman/Documents/Projects/Kanoapps/cordova-plugin-ironsource-ads-ka
+44 error Darwin 17.3.0
+45 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+46 error node v7.2.0
+47 error npm  v3.10.9
+48 error code E403
+49 error You cannot publish over the previously published version 1.0.14. : cordova-plugin-ironsource-ads-ka
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
