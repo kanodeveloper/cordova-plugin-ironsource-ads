@@ -64,6 +64,8 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
             userId = USERID;
         }
 
+        self.bannerController = [[UIViewController alloc] init];
+
         // After setting the delegates you can go ahead and initialize the SDK.
         [IronSource setUserId:userId];
 
@@ -111,6 +113,24 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
         NSString *js = [NSString stringWithFormat:@"cordova.fireWindowEvent('%@', %@)", event, jsonString];
         [self.commandDelegate evalJs:js];
     }
+
+- (void)listSubviewsOfView:(UIView *)view {
+
+    // Get the subviews of the view
+    NSArray *subviews = [view subviews];
+
+    // Return if there are no subviews
+    if ([subviews count] == 0) return; // COUNT CHECK LINE
+
+    for (UIView *subview in subviews) {
+
+        // Do what you want to do with the subview
+        NSLog(@"%@", subview);
+
+        // List the subviews of subview
+        [self listSubviewsOfView:subview];
+    }
+}
 
     /**
      * Validates integration
@@ -294,11 +314,11 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
     if( placement == nil || [placement length] == 0)
     {
-        [IronSource loadBannerWithViewController:self.viewController size:adSize];
+        [IronSource loadBannerWithViewController:self.bannerController size:adSize];
     }
     else
     {
-        [IronSource loadBannerWithViewController:self.viewController size:adSize placement:placement];
+        [IronSource loadBannerWithViewController:self.bannerController size:adSize placement:placement];
     }
 
     // Send callback successfull
@@ -364,6 +384,11 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
                                        @"message" : error.description
                                        }
                                };
+
+
+        for (UIView *subUIView in self.bannerController.view.subviews ) {
+            [subUIView removeFromSuperview];
+        }
 
         [self emitWindowEvent:EVENT_BANNER_FAILED_TO_LOAD withData:data];
     }
