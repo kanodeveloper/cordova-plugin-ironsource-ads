@@ -91,6 +91,7 @@
             target-dir="src/com/charlesbodman/cordova/plugin/ironsource" />
         <framework src="src/android/ironsourceads.gradle" custom="true" type="gradleReference" />
         <framework src="com.google.android.gms:play-services-ads:$ANDROID_API_VERSION" />
+        <framework src="com.android.support:support-v4:+" />
     </platform>
 
     <platform name="ios">
