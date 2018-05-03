@@ -16,6 +16,5 @@ cdvPluginPostBuildExtras.add({
     compile 'com.ironsource.sdk:mediationsdk:6.7.8@jar'
     compile 'com.ironsource.adapters:admobadapter:4.1.4@jar'
     compile 'com.ironsource.adapters:facebookadapter:4.1.3@jar'
-    compile 'com.ironsource.adapters:unityadsadapter:4.1.0@jar'
   }
 });
