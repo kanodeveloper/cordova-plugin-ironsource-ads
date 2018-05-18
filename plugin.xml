@@ -103,9 +103,9 @@
         <header-file src="src/ios/IronSourceAdsPlugin.h" />
         <source-file src="src/ios/IronSourceAdsPlugin.m" />
 
-        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.8.0" />
-        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.1.3.0" />
-        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.1.3.0" />
+        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.9.1" />
+        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.1.3.2" />
+        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.1.4.1" />
 
         <framework src="CoreFoundation.framework" weak="true"/>
         <framework src="Foundation.framework" />
