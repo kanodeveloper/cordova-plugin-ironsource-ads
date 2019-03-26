@@ -1,9 +1,9 @@
-# IronSource Ads Cordova Plugin
+# IronSource Ads Cordova Plugin (Kano Games Internal Version)
 # <img src="https://github.com/charlesbodman/cordova-plugin-ironsource-ads/blob/master/images/ironsource_logo.png?raw=true" width="500"  />
 
 <p align="left">
 <img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">
-<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.9-blue.svg?style=flat-square">
+<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.8.2-blue.svg?style=flat-square">
 </p>
 
 --------
@@ -12,8 +12,7 @@
 
 - [State of Development](#state-of-development)
 - [Install](#install)
-- [API](#api)
-- [Adding Additional AD Network SDKs](#adding-additional-sdks)
+- [Usage](#usage)
 - [Official IronSource Documentation](http://developers.ironsrc.com/)
 
 
@@ -22,11 +21,8 @@
 - [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=Offerwall%20Support&style=flat-square">
 - [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=Interstitial%20Support&style=flat-square">
 - [ ] <img src="https://img.shields.io/badge/-In%20Development-yellow.svg?label=Banner%20Support&style=flat-square">
-- [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=IOS%20Banner%20Support&style=flat-square">
-- [ ] <img src="https://img.shields.io/badge/-In%20Development-yellow.svg?label=Andorid%20Banner%20Support&style=flat-square">
 
-
---------
+-------- 
 
 ## Install
 
@@ -34,8 +30,8 @@
 cordova plugin add cordova-plugin-ironsource-ads
 ```
 
---------
-## API
+-------- 
+## Usage
 
 - [Initialization](#initialization)
 - [Validate Integration](#validate-integration)
@@ -53,11 +49,8 @@ cordova plugin add cordova-plugin-ironsource-ads
   - [Has Offerwall](#has-offerwall)
   - [Show Offerwall](#show-offerwall)
   - [Offerwall Events](#offerwall-events)
-- [Banners](#banners)
-  - [Show Banner](#show-banner)
-  - [Hide Banner](#hide-banner)
-  - [Banner Events](#banner-events)
-
+  
+  
 All methods support optional `onSuccess` and `onFailure` parameters
 
 ### Initialization
@@ -68,10 +61,7 @@ IronSourceAds.init({
 ```
 
 ### Validate Integration
-Once you have finished your integration, call the following function and confirm you have integrated the ad networks you want are marked **VERIFIED**:
-
-*If they are not marked verified, look at the [Adding Additional AD Network SDKs](#adding-additional-sdks) section for help or the [Official IronSource Documentation](http://developers.ironsrc.com/)*
-
+Once you have finished your integration, call the following function and confirm that everything in your integration is marked as **VERIFIED**:
 
 ```javascript
 IronSourceAds.validateIntegration();
@@ -105,15 +95,6 @@ IronSourceAds.hasRewardedVideo({
 IronSourceAds.showRewardedVideo();
 ```
 
-**Show Rewarded Video (With options)**
-```javascript
-IronSourceAds.showRewardedVideo({
-    placement: "placementName", // Optional
-    onSuccess: function () { }, // Optional
-    onFailure: function (error) { } //Optional
-});
-```
-
 #### Rewarded Video Events
 
 
@@ -122,7 +103,7 @@ IronSourceAds.showRewardedVideo({
 window.addEventListener("rewardedVideoAvailabilityChanged", function(event){
 
     var available = event.available;
-
+    
 });
 ```
 **Rewarded Video Rewarded**
@@ -133,7 +114,7 @@ window.addEventListener("rewardedVideoRewardReceived", function(event){
     var placementName = placement.placementName;
     var rewardAmount = placement.rewardAmount;
     var rewardName = placement.rewardName;
-
+    
 });
 ```
 **Rewarded Video Started**
@@ -167,7 +148,7 @@ window.addEventListener("rewardedVideoFailed", function(){
 });
 ```
 ***
-### Interstitials
+### Interstitial
 
 #### Has Interstitial
 ```javascript
@@ -182,20 +163,10 @@ _Must be called before `showInterstitial`
 ```javascript
 IronSourceAds.loadInterstitial();
 ```
-
 ***
 #### Show Interstitial
 ```javascript
 IronSourceAds.showInterstitial();
-```
-
-**Show Interstitial Video (With options)**
-```javascript
-IronSourceAds.showInterstitial({
-    placement: "placementName", // Optional
-    onSuccess: function () { }, // Optional
-    onFailure: function (error) { } // Optional
-});
 ```
 ***
 #### Interstitial Events
@@ -232,7 +203,7 @@ window.addEventListener("interstitialClosed", function(){
 ```
 **Interstitial Will Open**
 ```javascript
-window.addEventListener("interstitialWillOpen", function(){
+window.addEventListener("interstitialClosed", function(){
 
 });
 ```
@@ -261,15 +232,6 @@ IronSourceAds.hasOfferwall({
 IronSourceAds.showOfferwall();
 ```
 
-**Show Offerwall (With options)**
-```javascript
-IronSourceAds.showOfferwall({
-    placement: "placementName", // Optional
-    onSuccess: function () { }, // Optional
-    onFailure: function (error) { } // Optional
-});
-```
-
 #### Offerwall Events
 
 **Offerwall Availability Changed**
@@ -288,10 +250,10 @@ window.addEventListener("offerwallShown", function(){
 **Offerwall Credit Recieved**
 ```javascript
 window.addEventListener("offerwallCreditReceived", function(event){
-
+  
   var credits = event.credits; // The number of credits the user has earned since //the last (void)didReceiveOfferwallCredits:
   var totalCredits = event.totalCredits; //The total number of credits ever earned by the user
-
+  
 });
 ```
 **Offerwall Credit Failed**
@@ -311,157 +273,4 @@ window.addEventListener("offerwallClosed", function(){
 window.addEventListener("offerwallShowFailed", function(){
 
 });
-```
-
-
-
-### Banners
-
-*Banner ads require Admob, Facebook, or InMobi integrated to work*
-
-#### Show Banner
-```javascript
-IronSourceAds.showBanner();
-```
-
-**Show Banner (With options)**
-```javascript
-IronSourceAds.showBanner({
-    placement: "placementName", // Optional
-    size:"standard", // Optional ("standard","large","rectangle","tablet")
-    position:"bottom", //Optional ("top", "bottom", "center"),
-    onSuccess: function () { }, // Optional
-    onFailure: function (error) { } // Optional
-});
-```
-
-#### Hide Banner
-```javascript
-IronSourceAds.hideBanner();
-```
-
-
-#### Banner Events
-
-
-**Banner Did Load**
-```javascript
-window.addEventListener("bannerDidLoad", function(event){
-
-});
-```
-
-**Banner Failed to Load**
-```javascript
-window.addEventListener("bannerFailedToLoad", function(error){
-
-});
-```
-
-**Banner Did Click**
-```javascript
-window.addEventListener("bannerDidClick");
-```
-
-**Banner Will Present Screen**
-```javascript
-window.addEventListener("bannerWillPresentScreen", function(){
-
-});
-```
-
-**Banner Did Dismiss Screen**
-```javascript
-window.addEventListener("bannerDidDismissScreen", function(){
-
-});
-```
-**Banner will leave application**
-```javascript
-window.addEventListener("bannerWillLeaveApplication", function(){
-
-});
-```
-
-
-
-# Adding Additional SDKS
-**By default, this plugin does not contain other ad providers sdks**
-
-### Android
-
-[Follow the integration guides here](https://developers.ironsrc.com/ironsource-mobile/android/android-sdk/#step-2)
-
-Edit `src/android/ironsourceads.gradle` from this plugin and add the mediation adapters you need
-
-*Example*
-```java
-cdvPluginPostBuildExtras.add({
-
-  repositories {
-    maven {
-      url "https://dl.bintray.com/ironsource-mobile/android-sdk"
-    }
-  }
-
-  repositories {
-    maven {
-      url "http://dl.bintray.com/ironsource-mobile/android-adapters"
-    }
-  }
-
-  dependencies {
-    compile 'com.ironsource.sdk:mediationsdk:6.7.3@jar'
-
-    //Example
-    compile 'com.ironsource.adapters:admobadapter:4.0.3@jar'
-    compile 'com.ironsource.adapters:facebookadapter:4.0.2@jar'
-    compile 'com.ironsource.adapters:unityadsadapter:4.0.1@jar'
-  }
-});
-
-```
-
-### IOS
-**IOS requires manual downloading of Adapter & SDK**
-[Download Adapters Here and follow the integration guides](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)
-
-*If you have any questions, create an issue, and I'll walk you through it. *
-
-**Edit `plugin.xml` of this plugin**
-
-```xml
-   <platform name="ios">
-        <config-file target="config.xml" parent="/*">
-            <feature name="IronSourceAdsPlugin">
-                <param name="ios-package" value="IronSourceAdsPlugin" />
-            </feature>
-        </config-file>
-        <header-file src="src/ios/IronSourceAdsPlugin.h" />
-        <source-file src="src/ios/IronSourceAdsPlugin.m" />
-        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.3.1" />
-
-        <!-- ADD MEDIATION FRAMEWORKS HERE -->
-        <!-- Example -->
-        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.0.2.1" />
-        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.0.1.1" />
-        <framework src="IronSourceUnityAdsAdapter" type="podspec" spec="~> 4.0.1.2" />
-        <!-- Example -->
-
-        <framework src="Foundation.framework" />
-        <framework src="AVFoundation.framework" />
-        <framework src="CoreMedia.framework" />
-        <framework src="CoreVideo.framework" />
-        <framework src="QuartzCore.framework" />
-        <framework src="SystemConfiguration.framework" />
-        <framework src="CoreGraphics.framework" />
-        <framework src="CFNetwork.framework" />
-        <framework src="MobileCoreServices.framework" />
-        <framework src="libz.dylib" />
-        <framework src="StoreKit.framework" />
-        <framework src="AdSupport.framework" />
-        <framework src="CoreLocation.framework" />
-        <framework src="CoreTelephony.framework" />
-        <framework src="Security.framework" />
-    </platform>
 ```
